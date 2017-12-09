@@ -7,7 +7,7 @@ This is (right now) just an example of how to interface with sbot from clojuresc
 
 The are a few ways to compile clojure to node.js, I used the cljs.jar found [here](https://github.com/clojure/clojurescript/releases/tag/r1.9.946). You could also try using leiningen/figwheel.  
 
-Start by cloning this repo, `git clone https://github.com/paidforby/ssb-cljent'
+Start by cloning this repo, `git clone https://github.com/paidforby/ssb-cljent`
 
 If using jar:
 * copy cljs.jar into the ssb-cljent directory
