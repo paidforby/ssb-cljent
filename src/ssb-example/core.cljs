@@ -8,10 +8,6 @@
 (def message {:type "post" :text "first clojurey post"})
 ;; this should be done with a let? 
 
-(defn clj->json
-  [ds]
-  (.stringify js/JSON (clj->js ds)))
-
 (ssbClient (fn [err sbot]
     (if err
       (println err)

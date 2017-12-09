@@ -21,7 +21,7 @@ In a separate terminal, start sbot by running, `sbot server`.
 
 Back in the ssb-cljent directory run, `node main.js`
 
-You should receive some debugging output. Amongst a bunch of hashes, you should see the message you published, `:content #js {:type post, :text first clojurey post}`. You may also open your preffered gui ssb-client and observe the message you just posted.
+You should receive some debugging output. Amongst a bunch of hashes, you should see the message you published, `:content #js {:type post, :text first clojurey post}`. You may also open your preferred gui ssb-client and observe the message you just posted.
 
 ## TODO 
 * a good way of testing and debugging?
