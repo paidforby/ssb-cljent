@@ -1,0 +1,5 @@
+*.jar
+*.js
+*.json
+node_modules
+out
