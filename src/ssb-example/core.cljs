@@ -1,14 +1,12 @@
 (ns ssb-example.core
   (:require left-pad))
-
-;;(ns example.core
-;;  (:require ssb-client))
+;; just including left-pad to demo another way of requiring node modules
 
 (enable-console-print!)
 
 (def ssbClient (js/require "ssb-client"))
 (def message {:type "post" :text "first clojurey post"})
-;;(println (.readdirSync fs js/__dirname))
+;; this should be done with a let? 
 
 (defn clj->json
   [ds]
@@ -23,12 +21,12 @@
     (println message)
     (println (clj->js message))
 
-    ; (.publish sbot (clj->js message) (fn [err msg] 
-    ;   (if err
-    ;     (println err)
-    ;     (println "no err"))
+    (.publish sbot (clj->js message) (fn [err msg] 
+      (if err
+        (println err)
+        (println "no err"))
 
-    ;   (println msg)))
+      (println msg)))
 
     (println "in scuttlebuts")))
 
