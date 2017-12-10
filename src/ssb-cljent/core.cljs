@@ -4,27 +4,41 @@
 
 (enable-console-print!)
 
+(def pull (js/require "pull-stream"))
 (def ssbClient (js/require "ssb-client"))
-(def message {:type "post" :text "first clojurey post"})
-;; this should be done with a let? 
+(def test_message {:type "post" :text "first clojurey post"})
 
-(ssbClient (fn [err sbot]
+(defn ssb_error [err]
+  (if err
+    (println err)
+    (println "message received")))
+
+(defn pub_message [message sbot]
+    (.publish sbot (clj->js message) 
+      (fn [err msg] 
+        (if err
+          (println err)
+          (println "no err"))
+    
+        (println msg))))
+
+(defn parse_message [msg]
+  (print (js->clj msg :keywordize-keys true)))
+
+(defn get_message [sbot]
+  (pull (.createFeedStream sbot) 
+        (.drain pull parse_message ssb_error)))
+
+(defn sbot_callback [err sbot]
     (if err
       (println err)
-      (println "no err"))
+      (println "no error"))
 
-    ;;(let [message ({:type "post" :text "first clojurey post"})])
-    (println message)
-    (println (clj->js message))
+    ;(pub_message test_message sbot)
+    (get_message sbot))
 
-    ;(.publish sbot (clj->js message) (fn [err msg] 
-    ;  (if err
-    ;    (println err)
-    ;    (println "no err"))
-    ;
-    ;  (println msg)))
-
-    (println "in scuttlebuts")))
+(def ssb (ssbClient sbot_callback))
+;;(.close ssb)
 
 ;; pad the number 42 with five zeros
 (println (left-pad 42 5 0))
