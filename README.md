@@ -30,7 +30,7 @@ You should receive some debugging output. Amongst a bunch of hashes, you should 
 Once you have sbot installed, connecting to a testnet is fairly simple. Instead of running `sbot server` which uses the default shs and sign keys, typically stored in the $HOME/.ssb directory, you manually set the keys by running,  
 ```
 sbot server -- --caps.shs="GVZDyNf1TrZuGv3W5Dpef0vaITW1UqOUO3aWLNBp+7A=" --caps.sign="gym3eJKBjm0E0OIjuh3O1VX8+lLVSGV2p5UzrMStHTs="
-``
+```
 The values of caps.shs and caps.sign are not important as long as they are valid hashes and are not the same as the default (or someone else's testnet?). The client must also reference the same keys in order to successful connect to this instance of sbot (i.e. if you try to run `sbot createLogStream` in your shell without also passing the same keys, it will fail to find the sbot server)   
 
 ## TODO
