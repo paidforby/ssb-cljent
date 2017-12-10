@@ -1,5 +1,6 @@
 *.jar
 *.js
-*.json
+*.log
 node_modules
+target
 out

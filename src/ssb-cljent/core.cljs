@@ -1,4 +1,4 @@
-(ns ssb-example.core
+(ns ssb-cljent.core
   (:require left-pad))
 ;; just including left-pad to demo another way of requiring node modules
 
@@ -17,12 +17,12 @@
     (println message)
     (println (clj->js message))
 
-    (.publish sbot (clj->js message) (fn [err msg] 
-      (if err
-        (println err)
-        (println "no err"))
-
-      (println msg)))
+    ;(.publish sbot (clj->js message) (fn [err msg] 
+    ;  (if err
+    ;    (println err)
+    ;    (println "no err"))
+    ;
+    ;  (println msg)))
 
     (println "in scuttlebuts")))
 
