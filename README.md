@@ -27,16 +27,26 @@ If using leinigen:
 You should receive some debugging output. Amongst a bunch of hashes, you should see the message you published, `:content #js {:type post, :text first clojurey post}`. You may also open your preferred gui ssb-client and observe the message you just posted.
 
 ## running testnet
-Once you have sbot installed, connecting to a testnet is not fairly simple. Instead of running `sbot server` which uses the default shs and sign keys, typically stored in the $HOME/.ssb/config, you manually set the keys by running,  
+To safely run an ssb-testnet, it may be best to use isolated docker containers. Luckily, node provides an almost ready-to-go [docker image](https://github.com/nodejs/docker-node). Scuttlebot is then installed on top of this by the Dockerfile. Once sbot is started within the docker-node container, a .ssb folder is created and brand-new set of keys are generated. No more fiddling about with your precious, local .ssb folder. Plus, you'll be able to create as many fake ssb users as your heart desires. To set up a docker testnet:  
+Build the docker-node-sbot container with,    
+```
+docker build -t ssbcljent . 
+```
+Enter the container with,  
+```
+docker run -it --entrypoint=/bin/bash ssbcljent -i
+```
+Generate a .ssb folder on a testnet with,
 ```
 sbot server -- --caps.shs="GVZDyNf1TrZuGv3W5Dpef0vaITW1UqOUO3aWLNBp+7A=" --caps.sign="gym3eJKBjm0E0OIjuh3O1VX8+lLVSGV2p5UzrMStHTs="
 ```
-WARNING: it is very likely you will fork your feed using the above command, we are working on a virtualized solution for building a testnet.     
-
-Vagrantfile currently builds a debian/stretch64 vm and installs node.js and npm; however, attempting to install scuttlebot produces [issue #1](https://github.com/paidforby/ssb-cljent/issues/1).
+WARNING: if you use the above command on your local machine, it is very likely you will fork your feed using the above command, we are working on a virtualized solution for building a testnet.     
 
 The values of caps.shs and caps.sign are not important as long as they are valid hashes and are not the same as the default (or someone else's testnet?). The client must also reference the same keys in order to successful connect to this instance of sbot (i.e. if you try to run `sbot createLogStream` in your shell without also passing the same keys, it will fail to find the sbot server)   
 
 ## TODO
 * add config opts to ssbClient code a la [ssb-minial](https://github.com/av8ta/ssb-minimal/blob/master/index.js)
 * functionally parse pull-stream from [scuttlebot](https://www.npmjs.com/package/scuttlebot)
+* pre-modified .ssb/config to pull into docker container
+* pull in ssb-cljent compiled to node
+* multi-container docker testnet
