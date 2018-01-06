@@ -15,7 +15,7 @@ If using jar:
 * copy cljs.jar into the ssb-cljent directory
 * `cd ssb-cljent`
 * `java -cp cljs.jar:src clojure.main build.clj` 
-* node main.js
+* `node main.js`
 
 If using leinigen:
 * `cd ssb-cljent`
@@ -40,13 +40,13 @@ Generate a .ssb folder on a testnet with,
 ```
 sbot server -- --caps.shs="GVZDyNf1TrZuGv3W5Dpef0vaITW1UqOUO3aWLNBp+7A=" --caps.sign="gym3eJKBjm0E0OIjuh3O1VX8+lLVSGV2p5UzrMStHTs="
 ```
-WARNING: if you use the above command on your local machine, it is very likely you will fork your feed using the above command, we are working on a virtualized solution for building a testnet.     
+WARNING: if you use the above command on your local machine, it is very likely you will fork your feed, use with caution.
 
 The values of caps.shs and caps.sign are not important as long as they are valid hashes and are not the same as the default (or someone else's testnet?). The client must also reference the same keys in order to successful connect to this instance of sbot (i.e. if you try to run `sbot createLogStream` in your shell without also passing the same keys, it will fail to find the sbot server)   
 
 ## TODO
 * add config opts to ssbClient code a la [ssb-minial](https://github.com/av8ta/ssb-minimal/blob/master/index.js)
 * functionally parse pull-stream from [scuttlebot](https://www.npmjs.com/package/scuttlebot)
-* pre-modified .ssb/config to pull into docker container
+* test entrypoint.sh
 * pull in ssb-cljent compiled to node
 * multi-container docker testnet

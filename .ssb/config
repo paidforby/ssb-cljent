@@ -1,0 +1,15 @@
+{
+  "caps": {
+    "shs": "GVZDyNf1TrZuGv3W5Dpef0vaITW1UqOUO3aWLNBp+7A=",
+    "sign": "gym3eJKBjm0E0OIjuh3O1VX8+lLVSGV2p5UzrMStHTs="
+  },
+  "port": 8007,
+  "ws": {
+    "port": 8988
+  },
+  "plugins": {
+    "ssb-about": true,
+    "ssb-backlinks": true,
+    "ssb-fulltext": true
+  }
+}
