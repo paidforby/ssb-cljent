@@ -49,4 +49,4 @@ The values of caps.shs and caps.sign are not important as long as they are valid
 * functionally parse pull-stream from [scuttlebot](https://www.npmjs.com/package/scuttlebot)
 * test entrypoint.sh
 * pull in ssb-cljent compiled to node
-* multi-container docker testnet
+* multi-container docker testnet a la [ssb-tutorial](https://github.com/don-smith/ssb-tutorial/blob/master/docker-compose.yml)
