@@ -5,7 +5,12 @@
   :min-lein-version "2.7.1"
 
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 [org.clojure/clojurescript "1.9.908"]]
+                 [org.clojure/clojurescript "1.9.908"]
+                 [org.clojure/core.async "0.3.441"]
+
+                 [com.cognitect/transit-clj "0.8.297"]
+                 [com.cognitect/transit-cljs "0.8.239"]
+                 ]
 
   :plugins [[lein-cljsbuild "1.1.7" :exclusions [[org.clojure/clojure]]]
             [lein-figwheel "0.5.13"]]

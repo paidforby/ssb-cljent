@@ -1,11 +1,12 @@
 (ns ssb-cljent.core
-  (:require left-pad))
+  (:require left-pad ))
 ;; just including left-pad to demo another way of requiring node modules
 
 (enable-console-print!)
 
 (def pull (js/require "pull-stream"))
 (def ssbClient (js/require "ssb-client"))
+(def webSocket (js/require "ws"))
 (def test_message {:type "post" :text "first clojurey post"})
 
 (defn ssb_error [err]
@@ -35,7 +36,20 @@
       (println "no error"))
 
     ;(pub_message test_message sbot)
-    (get_message sbot))
+    ;(get_message sbot)
+    )
+
+(defn ws_receive [message]
+  (println message))
+
+(defn ws_connect [ws]
+  (println "websocket client connected")
+  (.on ws "message" ws_receive)
+  (.send ws "something"))
+
+(def wss (webSocket.Server. (clj->js {:port "8080"})))
+
+(.on wss "connection" ws_connect)
 
 (def ssb (ssbClient sbot_callback))
 ;;(.close ssb)
