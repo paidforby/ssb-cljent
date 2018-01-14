@@ -26,13 +26,24 @@ If using leinigen:
 
 You should receive some debugging output. Amongst a bunch of hashes, you should see the message you published, `:content #js {:type post, :text first clojurey post}`. You may also open your preferred gui ssb-client and observe the message you just posted.
 
+## websocket
+ssb-cljent can now be talked to via a websocket connection. To set up the websocket server, we adapted the [ws node module](https://github.com/websockets/ws) to ClojureScript. Any websocket client may connect to a running sbb-cljent and post to sbot by sending a message over the websocket. More functionality coming...eventually. To test, we used [this simple websocket client](https://github.com/ticofab/simple-websocket-client), but _someone_ should write a Clojurescript front-end! 
+
 ## running testnet
 To safely run an ssb-testnet, it may be best to use isolated docker containers. Luckily, node provides an almost ready-to-go [docker image](https://github.com/nodejs/docker-node). Scuttlebot is then installed on top of this by the Dockerfile. Once sbot is started within the docker-node container, a .ssb folder is created and brand-new set of keys are generated. No more fiddling about with your precious, local .ssb folder. Plus, you'll be able to create as many fake ssb users as your heart desires. To set up a docker testnet:  
 Build the docker-node-sbot container with,    
 ```
 docker build -t ssbcljent . 
 ```
-Enter the container with,  
+Run the entrypoint script with,
+```
+docker run ssbcljent
+```
+Enter the container while it is running,  
+```
+docker exec -it <container_id> bash 
+```
+or, if it is not running, use, 
 ```
 docker run -it --entrypoint=/bin/bash ssbcljent -i
 ```
@@ -47,6 +58,4 @@ The values of caps.shs and caps.sign are not important as long as they are valid
 ## TODO
 * add config opts to ssbClient code a la [ssb-minial](https://github.com/av8ta/ssb-minimal/blob/master/index.js)
 * functionally parse pull-stream from [scuttlebot](https://www.npmjs.com/package/scuttlebot)
-* test entrypoint.sh
-* pull in ssb-cljent compiled to node
 * multi-container docker testnet a la [ssb-tutorial](https://github.com/don-smith/ssb-tutorial/blob/master/docker-compose.yml)

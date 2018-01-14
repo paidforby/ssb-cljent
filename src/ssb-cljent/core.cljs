@@ -19,7 +19,7 @@
       (fn [err msg] 
         (if err
           (println err)
-          (println "no err"))
+          (println "message published:"))
     
         (println msg))))
 
@@ -30,29 +30,29 @@
   (pull (.createFeedStream sbot) 
         (.drain pull parse_message ssb_error)))
 
-(defn sbot_callback [err sbot]
+(defn sbot_handler [err sbot]
+  (let [wss (webSocket.Server. (clj->js {:port "8080"}))]
     (if err
       (println err)
-      (println "no error"))
+      (println "sbot is running, connection avaliable on port 8080"))
 
-    ;(pub_message test_message sbot)
-    ;(get_message sbot)
-    )
+    (defn ws_receive [message] ;; ws handlers must be defn'd in this scope for sbot to work properly
+      (def msg {:type "post" :text message})
+      ;(pub_message msg sbot)
+      (println msg))
 
-(defn ws_receive [message]
-  (println message))
+    (defn ws_connect [ws]
+      (.on ws "message" ws_receive)
+      ;(get_message sbot)
+      (println "websocket client connected")
+      (.send ws "you're connected"))
 
-(defn ws_connect [ws]
-  (println "websocket client connected")
-  (.on ws "message" ws_receive)
-  (.send ws "something"))
+    (.on wss "connection" ws_connect)))
 
-(def wss (webSocket.Server. (clj->js {:port "8080"})))
+(defn start [& _]
+  (let [ssb (ssbClient sbot_handler)]
+  (println "ssb-cljent started!")))
 
-(.on wss "connection" ws_connect)
-
-(def ssb (ssbClient sbot_callback))
 ;;(.close ssb)
 
-;; pad the number 42 with five zeros
-(println (left-pad 42 5 0))
+(set! *main-cli-fn* start)
